@@ -3,7 +3,7 @@
            https://api.github.com/users/<your name>
 */
 
-axios.get('https://api.github.com/users/gordoncaister')
+
 // .then(function (response) {
 //   // handle success
 //   console.log(response);
@@ -104,19 +104,14 @@ function createCards(argArr){
 }
 
 
-const followersArray = [];
-axios.get("https://api.github.com/users/diddleslip/followers")
-.then(function (response) {
-  // handle success
-  response.forEach(element => {
-    followersarray.push(element.data.url)
-  });
-  console.log(response);
-})
 
-console.log(followersArray)
-followersArray.forEach(element => {
-axios.get(element)
+// axios.get("https://api.github.com/users/diddleslip/followers")
+
+//   console.log(response);
+// })
+
+const followersArray = [];
+axios.get('https://api.github.com/users/gordoncaister')
 .then(function (response) {
   // handle success
   document.querySelector('.cards').append(createCards(response));
@@ -129,7 +124,25 @@ axios.get(element)
 .then(function () {
   // always executed
 });
+
+axios.get('https://api.github.com/users/gordoncaister/followers')
+.then(function (response) {
+  response.data.forEach(element => {
+  followersArray.push(element.url)
+  })
+})
+.then(() => {
+  followersArray.forEach( x => {
+    axios.get(x)
+    .then(response => {
+      document.querySelector('.cards').append(createCards(response));
+    })
+  })
+})
+.catch(error => {
+  console.log(error);
 });
+
 
 
 /* List of LS Instructors Github username's: 
