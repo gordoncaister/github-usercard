@@ -105,24 +105,16 @@ function createCards(argArr){
 
 
 
-// axios.get("https://api.github.com/users/diddleslip/followers")
-
-//   console.log(response);
-// })
-
 const followersArray = [];
 axios.get('https://api.github.com/users/gordoncaister')
 .then(function (response) {
-  // handle success
   document.querySelector('.cards').append(createCards(response));
   console.log(response);
 })
 .catch(function (error) {
-  // handle error
   console.log(error);
 })
 .then(function () {
-  // always executed
 });
 
 axios.get('https://api.github.com/users/gordoncaister/followers')
